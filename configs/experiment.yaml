@@ -1,0 +1,11 @@
+# Experiment configuration template. This file intentionally has no active
+# values until the dataset and methodology are confirmed.
+#
+# Future settings to record:
+#   data_path: local path under data/raw/
+#   feature_columns: confirmed patient features used for clustering
+#   label_column: optional diagnosis label reserved for post-hoc evaluation
+#   n_clusters: selected k, or a documented candidate list
+#   distance_metric: metric supported by both implementations
+#   random_state: seed used for reproducibility
+#   output_dir: outputs location for metrics and figures

@@ -1,0 +1,26 @@
+├── README.md                         # Giới thiệu, cài đặt, nguồn dữ liệu và cách chạy
+├── requirements.txt                  # Các thư viện Python cần cài
+├── .gitignore                        # Bỏ qua môi trường ảo, cache, dữ liệu và kết quả sinh ra
+├── configs/
+│   └── experiment.yaml               # Cấu hình đường dẫn dữ liệu, đặc trưng, k, khoảng cách, seed
+├── data/
+│   ├── raw/                 			# Chỗ đặt dữ liệu gốc, không chỉnh sửa
+│   └── processed/          			# Chỗ đặt dữ liệu sau tiền xử lý
+├── notebooks/
+│   ├── 01_data_exploration.ipynb     # Khám phá dữ liệu và ghi lại quyết định tiền xử lý
+│   └── 02_experiment_analysis.ipynb  # Phân tích kết quả, hồ sơ cụm và biểu đồ
+├── src/
+│   ├── __init__.py                   # Khai báo thư mục src là Python package
+│   ├── data.py                       # Đọc dữ liệu và kiểm tra cột, kiểu dữ liệu
+│   ├── preprocessing.py              # Làm sạch, mã hóa, chuẩn hóa và chọn đặc trưng
+│   ├── kmedoids.py                   # Thuật toán K-Medoids tự cài đặt
+│   ├── library_model.py              # Chạy K-Medoids bằng thư viện
+│   ├── evaluation.py                 # Tính chỉ số đánh giá và tóm tắt các cụm
+│   └── visualization.py              # Các hàm vẽ biểu đồ dùng lại trong notebook/báo cáo
+├── scripts/
+│   └── run_experiment.py             # Chạy toàn bộ pipeline theo cấu hình
+├── tests/
+│   └── test_kmedoids.py              # Kiểm tra thuật toán trên dữ liệu nhỏ hoặc dữ liệu giả lập
+└── outputs/
+    ├── figures/             # Biểu đồ được tạo ra để phân tích và đưa vào báo cáo
+    └── metrics/            # Bảng chỉ số và tóm tắt kết quả chạy

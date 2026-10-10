@@ -1,0 +1,23 @@
+# Project-specific continuity file requested to remain local
+/AGENTS.md
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Notebook temporary state
+.ipynb_checkpoints/
+
+# Local secrets/config overrides
+.env
+.env.*
+!.env.example
+
+# Local datasets and generated experiment outputs
+/data/raw/*
+/data/processed/*
+/outputs/figures/*
+/outputs/metrics/*
