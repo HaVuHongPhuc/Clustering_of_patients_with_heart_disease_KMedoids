@@ -1,3 +1,1 @@
-# Python dependencies will be listed here after the dataset, implementation
-# approach, and library-based K-Medoids package have been selected.
-# Keep this file free of guessed or unused dependencies.
+%pip install pandas
