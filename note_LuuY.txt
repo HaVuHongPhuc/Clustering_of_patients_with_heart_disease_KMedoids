@@ -1,0 +1,1 @@
+Bước tính toán tay khoảng 20-30 record để chạy
