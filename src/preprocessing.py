@@ -1,4 +1,3 @@
-from __future__ import annotations
 """Chuẩn bị ma trận đặc trưng dùng chung cho hai mô hình K-Medoids.
 
 Phương án chính (Manhattan):
@@ -8,6 +7,8 @@ Phương án chính (Manhattan):
 Đối chứng (Gower): tính trên 13 cột gốc, ra ma trận khoảng cách để dùng với
 KMedoids(metric='precomputed').
 """
+
+from __future__ import annotations
 
 import numpy as np
 import pandas as pd
@@ -79,3 +80,37 @@ def gower_distance_matrix(X: pd.DataFrame) -> np.ndarray:
     D = total / len(FEATURE_COLS)
     np.fill_diagonal(D, 0.0)
     return D
+
+
+def save_processed(
+    df: pd.DataFrame,
+    X_mat: np.ndarray,
+    feature_names: list[str],
+    gower_matrix: np.ndarray,
+    out_dir,
+) -> dict:
+    """Lưu dữ liệu tiền xử lý vào out_dir (thường là data/processed/).
+
+    - heart_dedup.csv      : 13 cột gốc + target sau drop_duplicates (dùng cho hồ sơ cụm)
+    - X_manhattan.csv      : ma trận đặc trưng đã Scale + One-Hot (đầu vào Manhattan)
+    - target.csv           : nhãn target tách riêng (chỉ kiểm tra sau phân cụm)
+    - gower_distance.npy   : ma trận khoảng cách Gower n x n (đối chứng)
+    Thứ tự dòng của mọi file giống nhau.
+    """
+    from pathlib import Path
+
+    from .data import TARGET_COL
+
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    paths = {
+        "dedup": out / "heart_dedup.csv",
+        "X": out / "X_manhattan.csv",
+        "target": out / "target.csv",
+        "gower": out / "gower_distance.npy",
+    }
+    df.to_csv(paths["dedup"], index=False)
+    pd.DataFrame(X_mat, columns=feature_names).to_csv(paths["X"], index=False)
+    df[[TARGET_COL]].to_csv(paths["target"], index=False)
+    np.save(paths["gower"], gower_matrix)
+    return paths
