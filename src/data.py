@@ -13,7 +13,7 @@ bộ dữ liệu gồm 13 cột đặc trưng + cột `target`.
 kiểm tra sau khi phân cụm.
 """
 from pathlib import Path
-
+import numpy as np
 import pandas as pd
 
 # --- Phân nhóm 13 cột đặc trưng (theo ML Rà soát.docx) ---
@@ -66,6 +66,26 @@ def drop_duplicate_rows(df: pd.DataFrame) -> pd.DataFrame:
     """df.drop_duplicates() trước khi phân cụm; đặt lại chỉ số 0..n-1."""
     return df.drop_duplicates().reset_index(drop=True)
 
+def replace_abnormal_with_nan(df: pd.DataFrame) -> pd.DataFrame:
+    """Thay giá trị bất thường ca == 4 bằng NaN (ca hợp lệ chỉ là 0-3)."""
+    out = df.copy()
+    out["ca"] = out["ca"].astype(float)
+    out.loc[out["ca"] == 4, "ca"] = np.nan
+    return out
+
+def impute_mode(df: pd.DataFrame, cols=("ca",)) -> tuple[pd.DataFrame, dict]:
+    """Điền NaN bằng giá trị phổ biến nhất (mode) của từng cột phân loại.
+ 
+    K-Medoids/Gower/StandardScaler không nhận NaN nên cần bước này sau khi
+    đã đặt ca == 4 thành NaN. Trả (bảng đã điền, {cột: giá trị đã điền}).
+    """
+    out = df.copy()
+    fills = {}
+    for col in cols:
+        mode = out[col].mode(dropna=True).iloc[0]
+        out[col] = out[col].fillna(mode).astype(int)
+        fills[col] = int(mode)
+    return out, fills
 
 def split_features_target(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     """Tách X (13 cột) và target. target chỉ dùng để kiểm tra sau phân cụm."""

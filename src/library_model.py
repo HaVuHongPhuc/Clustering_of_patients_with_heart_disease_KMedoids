@@ -17,23 +17,22 @@ import warnings
 from dataclasses import dataclass
 
 import numpy as np
-from sklearn_extra.cluster import KMedoids
+from kmedoids import KMedoids
 
 RANDOM_STATE = 42
 METHOD = "pam"
-INIT = "k-medoids++"
+INIT = "build"          # kmedoids không có 'k-medoids++'; 'build' là BUILD của PAM
+BACKEND = "kmedoids"    # ghi vào run_config
 
 
 @dataclass
 class KMedoidsResult:
-    """Kết quả chạy thống nhất để evaluation.py so sánh các cách chạy."""
-
     n_clusters: int
     metric: str
     labels: np.ndarray
     medoid_indices: np.ndarray
-    inertia: float  # tổng khoảng cách từ mỗi điểm tới medoid của nó
-    n_iter: int
+    inertia: float
+    n_iter: int         # kmedoids không expose; giữ -1 để đồng nhất schema
 
 
 def fit_kmedoids(
@@ -42,30 +41,30 @@ def fit_kmedoids(
     metric: str = "manhattan",
     random_state: int = RANDOM_STATE,
 ) -> KMedoidsResult:
-    """Chạy KMedoids (pam, k-medoids++).
+    """KMedoids (PAM) trên dữ liệu đặc trưng hoặc ma trận khoảng cách precomputed.
 
-    data: ma trận đặc trưng (metric='manhattan') hoặc ma trận khoảng cách
-    n x n (metric='precomputed').
+    - metric='precomputed' → `data` phải là ma trận vuông n x n.
+    - metric khác (manhattan, euclidean, ...) → `data` là ma trận đặc trưng n x d.
     """
     if metric == "precomputed" and data.shape[0] != data.shape[1]:
         raise ValueError("metric='precomputed' cần ma trận khoảng cách vuông n x n")
 
+    # kmedoids dùng `metric='precomputed'` giống sklearn, chỉ khác không có init='k-medoids++'
     with warnings.catch_warnings():
-        # sklearn_extra dùng hàm đã bị cảnh báo deprecated trong sklearn mới
-        warnings.simplefilter("ignore", FutureWarning)
+        warnings.simplefilter("ignore")
         model = KMedoids(
             n_clusters=n_clusters,
-            metric=metric,
-            method=METHOD,
-            init=INIT,
+            metric=metric,          # 'precomputed' | 'manhattan' | 'euclidean' | ...
+            method=METHOD,          # 'pam' | 'fasterpam' | 'alternate'
+            init=INIT,              # 'build' | 'random' | 'first' | 'pam'
             random_state=random_state,
         ).fit(data)
 
     return KMedoidsResult(
         n_clusters=n_clusters,
         metric=metric,
-        labels=model.labels_,
-        medoid_indices=model.medoid_indices_,
+        labels=np.asarray(model.labels_),
+        medoid_indices=np.asarray(model.medoid_indices_),
         inertia=float(model.inertia_),
-        n_iter=int(model.n_iter_),
+        n_iter=int(getattr(model, "n_iter_", -1)),
     )
