@@ -10,7 +10,8 @@ Phúc:
 
 Quy:
   Chọn và mô tả nguồn dữ liệu; làm EDA và tiền xử lý; cài đặt bản thư viện; tính metric
-	FILE: src/data.py, src/preprocessing.py, notebooks/01_data_exploration.ipynb, src/library_model.py, src/evaluation.py, requirements.txt; phụ trách nguồn dữ liệu và data/raw/
+	FILE: src/data.py, src/preprocessing.py, notebooks/01_data_exploration.ipynb,
+  src/library_model.py, src/evaluation.py, requirements.txt; phụ trách nguồn dữ liệu và data/raw/
 
 
 CÙNG LÀM: Phúc chạy cấu hình và ghi kết quả; Quy tính/kiểm tra metric; Phúc dùng kết quả để phân tích cụm và tạo biểu đồ. Chương 1, 2, 6, báo cáo cuối và slide cùng rà soát.
