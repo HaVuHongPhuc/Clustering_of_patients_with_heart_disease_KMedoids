@@ -17,18 +17,21 @@ from sklearn.metrics import pairwise_distances
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from .data import BINARY_COLS, CATEGORICAL_COLS, FEATURE_COLS, NUMERIC_COLS
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
 
 
 def build_preprocessor() -> ColumnTransformer:
-    """ColumnTransformer: StandardScaler + OneHotEncoder + passthrough."""
     return ColumnTransformer(
         transformers=[
-            ("num", StandardScaler(), NUMERIC_COLS),
-            (
-                "cat",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                CATEGORICAL_COLS,
-            ),
+            ("num", Pipeline([
+                ("imp", SimpleImputer(strategy="median")),
+                ("sc", StandardScaler()),
+            ]), NUMERIC_COLS),
+            ("cat", Pipeline([
+                ("imp", SimpleImputer(strategy="most_frequent")),
+                ("oh", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
+            ]), CATEGORICAL_COLS),
             ("bin", "passthrough", BINARY_COLS),
         ],
         verbose_feature_names_out=False,
@@ -54,6 +57,8 @@ def manhattan_distance_matrix(X_mat: np.ndarray) -> np.ndarray:
 
 
 def gower_distance_matrix(X: pd.DataFrame) -> np.ndarray:
+    if X[FEATURE_COLS].isna().any().any():
+        raise ValueError("Còn NaN trong X; hãy impute_median + impute_mode trước khi tính Gower")
     """Khoảng cách Gower trên 13 cột gốc (chưa scale/one-hot).
 
     - Cột số (5): |xi - xj| / (max - min); cột có max == min thì đóng góp 0.
