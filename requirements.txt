@@ -1,1 +1,12 @@
-%pip install pandas
+# Runtime dependencies for data preparation, clustering and evaluation
+numpy>=2.0,<3.0
+pandas>=2.2,<4.0
+scikit-learn>=1.5,<2.0
+kmedoids>=0.5,<1.0
+
+# EDA notebook dependencies
+matplotlib>=3.8,<4.0
+seaborn>=0.13,<1.0
+
+# Register/select the project virtual environment as a Jupyter kernel
+ipykernel>=6.29,<8.0

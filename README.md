@@ -72,8 +72,28 @@ RTX 5070 Ti không tự làm K-Medoids nhanh hơn. Phúc benchmark CPU trước;
 
 Không commit dữ liệu bệnh nhân hoặc dữ liệu có thể nhận diện cá nhân nếu chưa xác minh quyền sử dụng và điều kiện chia sẻ. Dữ liệu gốc trong `data/raw/` được giữ nguyên; ghi cách tiền xử lý để kết quả có thể tái lập. `.gitignore` đang loại nội dung dữ liệu và output khỏi Git; chỉ đưa các tệp cần chia sẻ lên Git sau khi kiểm tra giấy phép và quyền riêng tư.
 
-## Chạy dự án
+## Môi trường Python
 
-Chưa thể chạy pipeline: các file Python hiện chưa có implementation, `requirements.txt` chưa khai báo thư viện, và chưa có dữ liệu/cấu hình. Sau khi các phần này được bổ sung, cập nhật mục này bằng lệnh cài đặt/chạy chính xác và các tham số cần thiết; không ghi lệnh chạy như thể pipeline đã hoạt động.
+Dự án đã được khởi tạo `.venv/` bằng Python 3.12.10. Tạo lại môi trường trên Windows (PowerShell) nếu cần:
 
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
 
+Kích hoạt môi trường trong PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Trong VS Code, mở Command Palette → **Python: Select Interpreter** → chọn `.venv\Scripts\python.exe`. Với notebook, chọn kernel `.venv` tương ứng. Có thể đăng ký kernel với tên rõ ràng bằng:
+
+```powershell
+.\.venv\Scripts\python.exe -m ipykernel install --user --name heart-kmedoids --display-name "Python (.venv - Heart K-Medoids)"
+```
+
+Thư viện hiện khai báo trong `requirements.txt`: NumPy, pandas, scikit-learn, kmedoids, Matplotlib, Seaborn và ipykernel. `.venv/` được `.gitignore` loại khỏi Git; chỉ commit `requirements.txt`, không commit toàn bộ môi trường.
+
+Notebook 1 và các module loader/preprocessing/library evaluation hiện có thể import bằng môi trường này. `scripts/run_experiment.py` và phần K-Medoids tự cài đặt vẫn là ghi chú/khung; chưa xem đó là pipeline hoàn chỉnh có thể chạy.
