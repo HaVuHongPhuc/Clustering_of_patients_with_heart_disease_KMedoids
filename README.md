@@ -2,9 +2,9 @@
 
 ## Trạng thái hiện tại
 
-Đây mới là **bộ khung dự án**. Các tệp trong `src/` và `scripts/` chỉ chứa ghi chú hướng dẫn; chưa có mã chạy được, dữ liệu, kết quả, danh sách thư viện hay kiểm thử. Hai notebook chỉ có ô Markdown hướng dẫn, chưa có ô mã.
+Đây là dự án đang triển khai: loader/tiền xử lý, mô hình K-Medoids tự cài đặt, adapter K-Medoids thư viện, pipeline metric thư viện và Notebooks 1–2 đã có mã chạy. Pipeline điều phối so sánh chung và test tự động cho mô hình tự cài đặt vẫn cần hoàn thiện; xem `CHECKLIST.md` để theo dõi trạng thái.
 
-Tên đề tài và thuật toán dự kiến đã biết. Bộ dữ liệu, nguồn dữ liệu, thành viên nhóm, phạm vi đặc trưng, giá trị `k`, metric và lựa chọn thư viện vẫn cần được xác nhận. Không điền các thông tin này bằng phỏng đoán.
+Nhóm đã chốt dùng 13 đặc trưng, giữ `target` riêng để đánh giá hậu nghiệm, Manhattan làm khoảng cách chính, Gower làm đối chứng, `k=2` và seed `42`. Dữ liệu được tải từ [Kaggle — Heart Disease Multi-Source Dataset](https://www.kaggle.com/datasets/alifsathar/heart-disease-multi-source-dataset), đăng bởi Alif Sathar, phiên bản 1 (phát hành 30/04/2026), giấy phép CC BY-SA 4.0. Nhóm xác nhận có bằng chứng về ngày tải; dataset page có mô tả và data dictionary. Quy và Phúc xác nhận giữ tất cả các nguồn trong file tổng hợp; Quy đã xác nhận quy tắc harmonize theo từng `source`.
 
 ## Mục tiêu dự án
 
@@ -17,23 +17,23 @@ Phân cụm hồ sơ bệnh nhân bằng K-Medoids, cài đặt thuật toán t�
 | `README.md` | Tài liệu trung tâm: cách tổ chức dự án, kế hoạch triển khai, dữ liệu, thực nghiệm và trạng thái. Cập nhật khi quyết định hoặc cách chạy thay đổi. |
 | `HD Thực hiện đồ án cuối kỳ môn Học máy.pdf` | Bản hướng dẫn môn học được cung cấp; dùng để đối chiếu yêu cầu đồ án, không chỉnh sửa. |
 | `MauBaoCaoHocMay.docx` | Mẫu báo cáo được cung cấp; dùng làm chuẩn cấu trúc báo cáo, không chỉnh sửa trong phần scaffold. |
-| `requirements.txt` | Khai báo các thư viện Python sau khi đã chốt lựa chọn và phiên bản. Hiện chỉ có ghi chú, chưa có thư viện nào được thêm. |
-| `configs/experiment.yaml` | Lưu cấu hình thực nghiệm như đường dẫn dữ liệu, cột đầu vào, nhãn chỉ dùng để đánh giá, `k`, metric khoảng cách và seed. Chỉ điền sau khi thống nhất quyết định. |
-| `data/raw/` | Chứa bản dữ liệu gốc, giữ nguyên không chỉnh sửa. Thư mục đang rỗng và không có `.gitkeep`. |
-| `data/processed/` | Chứa dữ liệu sau làm sạch/biến đổi nếu cần lưu trung gian. Thư mục đang rỗng và không có `.gitkeep`. |
-| `notebooks/01_data_exploration.ipynb` | Ghi EDA, kiểm tra chất lượng dữ liệu, trực quan hóa và giải thích các quyết định tiền xử lý. Hiện chỉ có hướng dẫn Markdown. |
-| `notebooks/02_experiment_analysis.ipynb` | Phân tích kết quả, so sánh cấu hình và mô tả đặc trưng từng cụm. Hiện chỉ có hướng dẫn Markdown. |
+| `requirements.txt` | Khai báo dependency runtime và notebook: NumPy, pandas, scikit-learn, kmedoids, Matplotlib, Seaborn, ipykernel. |
+| `configs/experiment.yaml` | Mẫu cấu hình; cần chuyển thành cấu hình chạy cuối đã chốt (13 feature, target tách riêng, Manhattan/Gower, k=2, seed=42). |
+| `data/raw/` | Có file tổng hợp `heart_disease_whole.csv` từ Kaggle; nhóm xác nhận dùng tất cả nguồn trong file và đã ghi nhận quy tắc harmonize theo từng `source`. File có 2.284 dòng vật lý tính cả header (2.283 bản ghi dữ liệu). |
+| `data/processed/` | Đang có `heart_dedup.csv`, `X_manhattan.csv`, `target.csv` và Gower matrix; các artifact được xác nhận cùng 2.283 dòng. |
+| `notebooks/01_data_exploration.ipynb` | Đã có EDA, kiểm tra chất lượng, quyết định xử lý và lưu dữ liệu processed/kết quả thư viện. |
+| `notebooks/02_experiment_analysis.ipynb` | Đã có phân tích kết quả thư viện, biểu đồ, hồ sơ cụm/medoid và đối chiếu target hậu nghiệm. Chưa có kết quả bản tự cài đặt để so sánh. |
 | `src/__init__.py` | Đánh dấu `src` là package Python; hiện chỉ có chú thích. |
-| `src/data.py` | Sau này cài đặt chức năng đọc dữ liệu, kiểm tra schema và báo lỗi khi thiếu cột cần thiết. |
-| `src/preprocessing.py` | Sau này cài đặt làm sạch, mã hóa biến phân loại, chuẩn hóa và tách cột đầu vào khỏi nhãn đánh giá. |
-| `src/kmedoids.py` | Sau này cài đặt K-Medoids từ đầu: khởi tạo medoid, gán cụm, cập nhật medoid, dừng và dự đoán/gán nhãn cụm. |
-| `src/library_model.py` | Sau này gọi thư viện K-Medoids đã chọn với cùng dữ liệu/metric để so sánh công bằng với bản tự cài đặt. |
-| `src/evaluation.py` | Sau này tính các chỉ số phân cụm và bảng tóm tắt kích thước/cấu hình cụm. Chỉ tính metric phù hợp với dữ liệu và cách biểu diễn. |
-| `src/visualization.py` | Sau này tập hợp hàm vẽ biểu đồ chọn `k`, phân bố cụm và hồ sơ cụm. |
-| `scripts/run_experiment.py` | Điểm chạy pipeline: đọc cấu hình, nạp dữ liệu, tiền xử lý, chạy mô hình, đánh giá và lưu kết quả. Hiện chỉ có ghi chú. |
-| `tests/test_kmedoids.py` | Vị trí dự kiến cho kiểm thử thuật toán trên trường hợp nhỏ/giả lập sau khi có implementation. Hiện chưa có kiểm thử. |
-| `outputs/figures/` | Chứa hình được sinh ra cho phân tích và báo cáo. Thư mục đang rỗng và không có `.gitkeep`. |
-| `outputs/metrics/` | Chứa bảng metric và tóm tắt thực nghiệm được sinh ra. Thư mục đang rỗng và không có `.gitkeep`. |
+| `src/data.py` | Đang đọc/kiểm tra dữ liệu, harmonize encoding, đánh dấu giá trị bất thường và xử lý missing values. |
+| `src/preprocessing.py` | Đang tạo biểu diễn Manhattan và ma trận khoảng cách Gower; target tách khỏi feature input. |
+| `src/kmedoids.py` | Đã có K-Medoids alternate tự cài đặt; đã kiểm tra ví dụ tính tay, cần bổ sung test tự động và thực nghiệm trên dữ liệu dự án. |
+| `src/library_model.py` | Adapter đang chạy với package `kmedoids` (PAM/BUILD); hỗ trợ Manhattan trên ma trận đặc trưng và Gower qua ma trận khoảng cách `precomputed`. |
+| `src/evaluation.py` | Đang chạy sweep k, tính silhouette/objective, kích thước cụm và đánh giá target hậu nghiệm; ghi labels, medoids và run config dưới `outputs/metrics/`. |
+| `src/visualization.py` | Chưa có hàm vẽ dùng lại; biểu đồ hiện được tạo trong Notebook 2. |
+| `scripts/run_experiment.py` | Chưa tích hợp; mục tiêu là điều phối cấu hình, hai mô hình, đánh giá và lưu kết quả. |
+| `tests/test_kmedoids.py` | Hiện còn ghi chú; cần viết và chạy test tự động cho thuật toán tự cài đặt. |
+| `outputs/figures/` | Đang có ba hình phân tích kết quả thư viện trong Notebook 2. |
+| `outputs/metrics/` | Đang có sweep thư viện Manhattan/Gower, k=2..8, seed 42; chưa có kết quả mô hình tự cài đặt. |
 
 ## Phân công công việc của Phúc và Quy
 
@@ -96,4 +96,6 @@ Trong VS Code, mở Command Palette → **Python: Select Interpreter** → chọ
 
 Thư viện hiện khai báo trong `requirements.txt`: NumPy, pandas, scikit-learn, kmedoids, Matplotlib, Seaborn và ipykernel. `.venv/` được `.gitignore` loại khỏi Git; chỉ commit `requirements.txt`, không commit toàn bộ môi trường.
 
-Notebook 1 và các module loader/preprocessing/library evaluation hiện có thể import bằng môi trường này. `scripts/run_experiment.py` và phần K-Medoids tự cài đặt vẫn là ghi chú/khung; chưa xem đó là pipeline hoàn chỉnh có thể chạy.
+Notebook 1, Notebook 2, các module loader/preprocessing/library evaluation và thuật toán tự cài đặt hiện có mã chạy. `scripts/run_experiment.py` vẫn là ghi chú/khung; chưa có pipeline chung để chạy và so sánh đầy đủ hai implementation.
+
+Mô hình K-Medoids dùng thư viện **đã được cài đặt** trong `src/library_model.py` và được gọi từ `src/evaluation.py`. Kết quả library sweep hiện có trong `outputs/metrics/` cho Manhattan và Gower với `k=2..8`, seed 42. Pipeline so sánh chung với bản tự cài đặt trong `scripts/run_experiment.py` vẫn chưa hoàn thiện; kết quả library hiện có không phải kết quả so sánh custom-vs-library.
