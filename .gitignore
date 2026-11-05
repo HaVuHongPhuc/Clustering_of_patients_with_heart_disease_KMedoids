@@ -1,14 +1,27 @@
-# Project-specific continuity file requested to remain local
+# Local project notes and practice code
 /AGENTS.md
+/CHECKLIST.md
+TapCode_Kmedoids.py
 
-# Python environments and caches
+# Python environments, bytecode and tool caches
 .venv/
 venv/
+env/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+/build/
+/dist/
 
-# Notebook temporary state
+# Notebook temporary state (keep the actual .ipynb notebooks)
 .ipynb_checkpoints/
 
 # Local secrets/config overrides
@@ -21,9 +34,34 @@ __pycache__/
 /data/processed/*
 /outputs/figures/*
 /outputs/metrics/*
+/outputs/library_30_records/
+/outputs/report_completion_*/*
+# Keep the analysis source needed to reproduce report results
+!/outputs/report_completion_*/reproduce_analysis.py
 
-TapCode_Kmedoids.py
+# Local reference documents/notes, as requested; keep dependency manifests
+*.txt
+!requirements.txt
+!requirements-*.txt
+!constraints.txt
+!constraints-*.txt
+*.pdf
+*.docx
 
-CHECKLIST.md
+# Temporary document locks, backups, logs and one-off rewrite helpers
+~$*
+*.bak
+*.bak.*
+*.tmp
+*.temp
+*.log
+/_*_tmp.py
 
-Báo Cáo Học Máy.docx
+# OS-generated metadata
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+*.csv
+
+*.CSV
