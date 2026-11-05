@@ -1,0 +1,601 @@
+{
+  "raw_shape": [
+    2283,
+    15
+  ],
+  "harm_shape": [
+    2283,
+    14
+  ],
+  "dedup_shape": [
+    2283,
+    14
+  ],
+  "sources": {
+    "fedesoriano_heart": 760,
+    "uci_multi_cleveland": 304,
+    "heart_disease_1048": 303,
+    "kaggle_heart_1025": 302,
+    "uci_multi_hungary": 292,
+    "uci_multi_va long beach": 199,
+    "uci_multi_switzerland": 123
+  },
+  "target_counts": {
+    "1": 1222,
+    "0": 1061
+  },
+  "missing_raw": {
+    "age": 0,
+    "sex": 0,
+    "cp": 0,
+    "trestbps": 60,
+    "chol": 352,
+    "fbs": 90,
+    "restecg": 2,
+    "thalach": 55,
+    "exang": 55,
+    "oldpeak": 62,
+    "slope": 307,
+    "ca": 1672,
+    "thal": 1547,
+    "target": 0,
+    "source": 0
+  },
+  "missing_harmonized": {
+    "age": 0,
+    "trestbps": 60,
+    "chol": 352,
+    "thalach": 55,
+    "oldpeak": 62,
+    "cp": 0,
+    "restecg": 2,
+    "slope": 307,
+    "ca": 1672,
+    "thal": 1547,
+    "sex": 0,
+    "fbs": 90,
+    "exang": 55,
+    "target": 0
+  },
+  "numeric_describe": {
+    "age": {
+      "count": 2283.0,
+      "mean": 53.65,
+      "std": 9.402,
+      "min": 28.0,
+      "25%": 47.0,
+      "50%": 54.0,
+      "75%": 60.0,
+      "max": 77.0
+    },
+    "trestbps": {
+      "count": 2223.0,
+      "mean": 131.86,
+      "std": 18.028,
+      "min": 80.0,
+      "25%": 120.0,
+      "50%": 130.0,
+      "75%": 140.0,
+      "max": 200.0
+    },
+    "chol": {
+      "count": 1931.0,
+      "mean": 245.363,
+      "std": 56.37,
+      "min": 85.0,
+      "25%": 209.0,
+      "50%": 239.0,
+      "75%": 275.0,
+      "max": 603.0
+    },
+    "thalach": {
+      "count": 2228.0,
+      "mean": 141.304,
+      "std": 25.575,
+      "min": 60.0,
+      "25%": 122.0,
+      "50%": 143.0,
+      "75%": 161.0,
+      "max": 202.0
+    },
+    "oldpeak": {
+      "count": 2221.0,
+      "mean": 0.868,
+      "std": 1.093,
+      "min": -2.6,
+      "25%": 0.0,
+      "50%": 0.5,
+      "75%": 1.5,
+      "max": 6.2
+    }
+  },
+  "old_config": {
+    "n_rows": 2283,
+    "n_features_manhattan": 25,
+    "k_range": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "random_state": 42,
+    "method": "pam",
+    "init": "build",
+    "main_distance": "manhattan (StandardScaler + OneHot + binary giữ nguyên)",
+    "control_distance": "gower (13 cột gốc, KMedoids metric='precomputed')",
+    "best_k": {
+      "manhattan": 2,
+      "gower": 3
+    },
+    "versions": {
+      "python": "3.12.10",
+      "pandas": "3.1.0",
+      "numpy": "2.5.4",
+      "scikit-learn": "1.9.1",
+      "kmedoids": "0.5.5"
+    },
+    "source_filter": null,
+    "harmonize": "Kaggle 0-based -> UCI 1-based (cp+1, slope+1, thal map)",
+    "abnormal_codes": "mọi mã ngoài EXPECTED_VALUES -> NaN -> mode/median",
+    "fill_categorical": {
+      "cp": 4,
+      "restecg": 0,
+      "slope": 2,
+      "ca": 0,
+      "thal": 7,
+      "fbs": 0,
+      "exang": 0
+    },
+    "fill_numeric": {
+      "trestbps": 130.0,
+      "chol": 239.0,
+      "thalach": 143.0,
+      "oldpeak": 0.5
+    }
+  },
+  "domains_baseline": {
+    "sex": [
+      0,
+      1
+    ],
+    "fbs": [
+      0,
+      1
+    ],
+    "exang": [
+      0,
+      1
+    ],
+    "cp": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "restecg": [
+      0,
+      1,
+      2
+    ],
+    "slope": [
+      1,
+      2,
+      3
+    ],
+    "ca": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "thal": [
+      3,
+      6,
+      7
+    ],
+    "target": [
+      0,
+      1
+    ]
+  },
+  "hashes": {
+    "data\\raw\\heart_disease_whole.csv": "7ec80b48de276d4d5ef8d1a1e5fb426846bbb86c34cd894d509b4a6c6a1ea119",
+    "data\\processed\\X_manhattan.csv": "0737dc8c9c5434e34597b5bbeab9b8ef03d0da03990a8620267b3ac572a4c0c2",
+    "src\\kmedoids.py": "ed0f8d9f2428a6aa1cbd1fd90b70a6b626bde0cecf16b74b0c3942c8d5fbdc26",
+    "src\\data.py": "34e2b8db09687ba6c67757457e54854d97aeabcc15d5b7df45024d4c361450d0"
+  },
+  "domain_replaced_counts": {
+    "age": 0,
+    "trestbps": 0,
+    "chol": 0,
+    "thalach": 0,
+    "oldpeak": 0,
+    "cp": 424,
+    "restecg": 0,
+    "slope": 183,
+    "ca": 4,
+    "thal": 0,
+    "sex": 0,
+    "fbs": 0,
+    "exang": 0
+  },
+  "missing_before_imputation": {
+    "age": 0,
+    "trestbps": 60,
+    "chol": 352,
+    "thalach": 55,
+    "oldpeak": 62,
+    "cp": 424,
+    "restecg": 2,
+    "slope": 490,
+    "ca": 1676,
+    "thal": 1547,
+    "sex": 0,
+    "fbs": 90,
+    "exang": 55,
+    "target": 0
+  },
+  "baseline_recreated_matches_saved": true,
+  "matrix_matches_saved": true,
+  "scaler": {
+    "mean": [
+      53.64958388085852,
+      131.8107752956636,
+      244.3815155497153,
+      141.34515987735435,
+      0.8583880858519493
+    ],
+    "scale": [
+      9.399715448127996,
+      17.78816626091219,
+      51.88045450198508,
+      25.260812242216335,
+      1.0795853562647129
+    ],
+    "columns": [
+      "age",
+      "trestbps",
+      "chol",
+      "thalach",
+      "oldpeak"
+    ]
+  },
+  "feature_names": [
+    "age",
+    "trestbps",
+    "chol",
+    "thalach",
+    "oldpeak",
+    "cp_1",
+    "cp_2",
+    "cp_3",
+    "cp_4",
+    "restecg_0",
+    "restecg_1",
+    "restecg_2",
+    "slope_1",
+    "slope_2",
+    "slope_3",
+    "ca_0",
+    "ca_1",
+    "ca_2",
+    "ca_3",
+    "thal_3",
+    "thal_6",
+    "thal_7",
+    "sex",
+    "fbs",
+    "exang"
+  ],
+  "custom_baseline": {
+    "silhouette": 0.20167852140370163,
+    "inertia": 17072.37170522124,
+    "ARI_target": 0.015081098370383971,
+    "purity": 0.5681121331581253,
+    "sizes": [
+      2084,
+      199
+    ],
+    "medoids": [
+      2018,
+      88
+    ],
+    "n_iter": 2,
+    "converged": true,
+    "fit_seconds": 7.332945599999221,
+    "history": [
+      {
+        "iteration": 1,
+        "medoid_indices": [
+          456,
+          102
+        ],
+        "cluster_sizes": [
+          2034,
+          249
+        ],
+        "objective": 20022.765749641396,
+        "updated_medoid_indices": [
+          2018,
+          88
+        ]
+      },
+      {
+        "iteration": 2,
+        "medoid_indices": [
+          2018,
+          88
+        ],
+        "cluster_sizes": [
+          2084,
+          199
+        ],
+        "objective": 17072.37170522124,
+        "updated_medoid_indices": [
+          2018,
+          88
+        ]
+      }
+    ]
+  },
+  "library_baseline_manhattan_k2": {
+    "silhouette": 0.1568020240534231,
+    "inertia": 15802.36387244273,
+    "ARI_target": 0.037824546892842655,
+    "purity": 0.5983355234340779,
+    "sizes": [
+      1502,
+      781
+    ],
+    "medoids": [
+      644,
+      1200
+    ],
+    "n_iter": -1,
+    "ARI_saved": 1.0
+  },
+  "ARI_custom_library": -0.019337561024355892,
+  "library_baseline_gower_k2": {
+    "silhouette": 0.18904423197489617,
+    "inertia": 435.11059936130346,
+    "ARI_target": 0.03545647577953964,
+    "purity": 0.5957074025405169,
+    "sizes": [
+      1618,
+      665
+    ],
+    "medoids": [
+      2018,
+      1335
+    ],
+    "n_iter": -1,
+    "ARI_saved": 1.0
+  },
+  "library_baseline_gower_k3": {
+    "silhouette": 0.19113807594432253,
+    "inertia": 399.13483151792985,
+    "ARI_target": 0.026139013010101964,
+    "purity": 0.5816907577748577,
+    "sizes": [
+      1173,
+      609,
+      501
+    ],
+    "medoids": [
+      833,
+      1335,
+      1788
+    ],
+    "n_iter": -1,
+    "ARI_saved": 1.0
+  },
+  "sensitivity_missing_before_imputation": {
+    "age": 0,
+    "trestbps": 60,
+    "chol": 352,
+    "thalach": 55,
+    "oldpeak": 62,
+    "cp": 0,
+    "restecg": 2,
+    "slope": 307,
+    "ca": 1672,
+    "thal": 1547,
+    "sex": 0,
+    "fbs": 90,
+    "exang": 55,
+    "target": 0
+  },
+  "sensitivity_features": [
+    "age",
+    "trestbps",
+    "chol",
+    "thalach",
+    "oldpeak",
+    "cp_1.0",
+    "cp_2.0",
+    "cp_3.0",
+    "cp_4.0",
+    "cp_5.0",
+    "restecg_0.0",
+    "restecg_1.0",
+    "restecg_2.0",
+    "slope_1.0",
+    "slope_2.0",
+    "slope_3.0",
+    "slope_4.0",
+    "ca_0.0",
+    "ca_1.0",
+    "ca_2.0",
+    "ca_3.0",
+    "ca_4.0",
+    "thal_3.0",
+    "thal_6.0",
+    "thal_7.0",
+    "sex",
+    "fbs",
+    "exang"
+  ],
+  "sensitivity_mode": {
+    "restecg": 0,
+    "slope": 2,
+    "ca": 0,
+    "thal": 7,
+    "fbs": 0,
+    "exang": 0
+  },
+  "sensitivity_domains": {
+    "sex": [
+      0,
+      1
+    ],
+    "fbs": [
+      0,
+      1
+    ],
+    "exang": [
+      0,
+      1
+    ],
+    "cp": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "restecg": [
+      0,
+      1,
+      2
+    ],
+    "slope": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "ca": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "thal": [
+      3,
+      6,
+      7
+    ],
+    "target": [
+      0,
+      1
+    ]
+  },
+  "sensitivity_library_manhattan_k2": {
+    "silhouette": 0.1473265892890228,
+    "inertia": 16861.4461312413,
+    "ARI_target": 0.016277132487351097,
+    "purity": 0.565922032413491,
+    "sizes": [
+      1586,
+      697
+    ],
+    "medoids": [
+      644,
+      1200
+    ],
+    "n_iter": -1
+  },
+  "sensitivity_library_gower_k2": {
+    "silhouette": 0.1761465884947384,
+    "inertia": 474.45469417743016,
+    "ARI_target": 0.013423731645690887,
+    "purity": 0.5606657906263688,
+    "sizes": [
+      1644,
+      639
+    ],
+    "medoids": [
+      2018,
+      1204
+    ],
+    "n_iter": -1
+  },
+  "custom_sensitivity": {
+    "silhouette": 0.1806798531372692,
+    "inertia": 18288.756396190118,
+    "ARI_target": 0.01394804311606059,
+    "purity": 0.565922032413491,
+    "sizes": [
+      2077,
+      206
+    ],
+    "medoids": [
+      2018,
+      88
+    ],
+    "n_iter": 2,
+    "converged": true
+  },
+  "sensitivity_best": {
+    "manhattan": 2,
+    "gower": 2
+  },
+  "missing_total_raw": 4202,
+  "missing_total_baseline": 4813,
+  "numeric_stats": {
+    "age": {
+      "count": 2283.0,
+      "mean": 53.64958388085852,
+      "std": 9.401774757047024,
+      "min": 28.0,
+      "25%": 47.0,
+      "50%": 54.0,
+      "75%": 60.0,
+      "max": 77.0
+    },
+    "trestbps": {
+      "count": 2223.0,
+      "mean": 131.859649122807,
+      "std": 18.028158424710515,
+      "min": 80.0,
+      "25%": 120.0,
+      "50%": 130.0,
+      "75%": 140.0,
+      "max": 200.0
+    },
+    "chol": {
+      "count": 1931.0,
+      "mean": 245.3625064733299,
+      "std": 56.37048177254422,
+      "min": 85.0,
+      "25%": 209.0,
+      "50%": 239.0,
+      "75%": 275.0,
+      "max": 603.0
+    },
+    "thalach": {
+      "count": 2228.0,
+      "mean": 141.30430879712748,
+      "std": 25.57508890044422,
+      "min": 60.0,
+      "25%": 122.0,
+      "50%": 143.0,
+      "75%": 161.0,
+      "max": 202.0
+    },
+    "oldpeak": {
+      "count": 2221.0,
+      "mean": 0.8683926159387664,
+      "std": 1.0931113461823814,
+      "min": -2.6,
+      "25%": 0.0,
+      "50%": 0.5,
+      "75%": 1.5,
+      "max": 6.2
+    }
+  }
+}
