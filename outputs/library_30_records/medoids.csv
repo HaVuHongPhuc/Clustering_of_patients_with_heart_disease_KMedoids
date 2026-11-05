@@ -1,3 +1,0 @@
-cluster,record,age,trestbps,chol,thalach,oldpeak,cp,restecg,slope,ca,thal,sex,fbs,exang
-0,R20,49,130.0,266.0,171.0,0.6,2,0,1,0,3,1.0,0,0
-1,R25,60,130.0,206.0,132.0,2.4,4,2,2,2,7,1.0,0,1
