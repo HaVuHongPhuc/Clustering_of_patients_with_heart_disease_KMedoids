@@ -1,11 +1,23 @@
-# Experiment configuration template. This file intentionally has no active
-# values until the dataset and methodology are confirmed.
-#
-# Future settings to record:
-#   data_path: local path under data/raw/
-#   feature_columns: confirmed patient features used for clustering
-#   label_column: optional diagnosis label reserved for post-hoc evaluation
-#   n_clusters: selected k, or a documented candidate list
-#   distance_metric: metric supported by both implementations
-#   random_state: seed used for reproducibility
-#   output_dir: outputs location for metrics and figures
+# So sánh tại cùng k. Khảo sát k=2..8 được chạy riêng trong Notebook 01.
+# Đường dẫn tương đối tính từ thư mục gốc dự án.
+data_path: data/raw/heart_disease_whole.csv
+feature_columns:
+  - age
+  - trestbps
+  - chol
+  - thalach
+  - oldpeak
+  - restecg
+  - slope
+  - ca
+  - thal
+  - sex
+  - fbs
+  - exang
+held_out_columns: [cp, target]
+n_clusters: 2
+random_state: 42
+custom_max_iter: 100
+primary_distance: manhattan
+control_distance: gower
+output_root: outputs/experiments

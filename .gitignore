@@ -34,6 +34,7 @@ htmlcov/
 /data/processed/*
 /outputs/figures/*
 /outputs/metrics/*
+/outputs/experiments/
 /outputs/library_30_records/
 /outputs/report_completion_*/*
 # Keep the analysis source needed to reproduce report results
@@ -65,3 +66,4 @@ Desktop.ini
 *.csv
 
 *.CSV
+tasks.md
