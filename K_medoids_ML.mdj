@@ -91,16 +91,16 @@
 									"font": "Arial;13;0",
 									"left": 466,
 									"top": 258,
-									"width": 54.18994140625,
+									"width": 69,
 									"height": 13,
-									"text": "target",
+									"text": "target và cp",
 									"wordWrap": true
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 456,
 							"top": 248,
-							"width": 74.18994140625,
+							"width": 89,
 							"height": 33,
 							"nameLabel": {
 								"$ref": "AAAAAAGholl4Cr5R6fw="
@@ -127,7 +127,7 @@
 									"top": 450,
 									"width": 54.18994140625,
 									"height": 26,
-									"text": "13 đặc trưng",
+									"text": "12 đặc trưng",
 									"wordWrap": true
 								}
 							],
@@ -1115,7 +1115,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGholkh3L4/m3c="
 					},
-					"name": "target",
+					"name": "target và cp",
 					"ownedElements": [
 						{
 							"_type": "FCFlow",
@@ -1138,7 +1138,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGholkh3L4/m3c="
 					},
-					"name": "13 đặc trưng",
+					"name": "12 đặc trưng",
 					"ownedElements": [
 						{
 							"_type": "FCFlow",
